@@ -2,6 +2,9 @@ create database country_db;
 
 use country_db;
 
+set mapreduce.map.tasks.speculative.execution=true;
+set mapreduce.reduce.tasks.speculative.execution=true;
+
 create external table country_info(
 	country_code string,
 	short_name string,
@@ -37,10 +40,10 @@ create external table country_info(
 	row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 	with serdeproperties(
 		"separatorChar" = ",",
-		"quoteChar"     = "\""
+		"quoteChar"     = '\"'
 	)
 	stored as textfile
-	location '/user/cloudera/loadData'
+	location '/user/cloudera/loadData/country_info'
 	tblproperties("skip.header.line.count"="1");
 	
 load data local inpath '/home/cloudera/data/genderStatsData/Gender_StatsCountry.csv' overwrite into table country_info;
@@ -111,10 +114,10 @@ create external table country_gender(
 	row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 	with serdeproperties(
 		"separatorChar" = ",",
-		"quoteChar"     = "\""
+		"quoteChar"     = '\"'
 	)
 	stored as textfile
-	location '/user/cloudera/loadData'
+	location '/user/cloudera/loadData/country_gender'
 	tblproperties("skip.header.line.count"="1");
 	
 load data local inpath '/home/cloudera/data/genderStatsData/Gender_StatsData.csv' overwrite into table country_gender;
