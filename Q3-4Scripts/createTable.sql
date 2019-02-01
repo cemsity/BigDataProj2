@@ -40,6 +40,5 @@ load data local infile '/media/sf_shared/gender-data/Gender_StatsCountry.csv'
 into table gender_series
 fields terminated by ','
 OPTIONALLY ENCLOSED BY '"'
-ESCAPED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
